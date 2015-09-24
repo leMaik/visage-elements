@@ -5,7 +5,7 @@ visage-elements
 2D and 3D images of a player's head or body.
 
 This library includes three [Polymer][polymer] elements to simplify their
-usage.
+usage. See the demo [here][gh-pages].
 
 Examples:
 
@@ -28,3 +28,4 @@ Instead of using UUIDs (which is the recommended way) you may also use player na
 
 [visage]:http://visage.surgeplay.com/
 [polymer]:https://www.polymer-project.org/
+[gh-pages]:http://lemaik.github.io/visage-elements/
