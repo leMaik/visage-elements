@@ -1,0 +1,22 @@
+{
+  "name": "visage-elements",
+  "version": "1.0.0",
+  "authors": [
+    "leMaik <an@maik.tk>"
+  ],
+  "description": "Polymer elements for Visage, an avatar service for Minecraft.",
+  "keywords": [
+    "polymer",
+    "visage",
+    "minecraft",
+    "webcomponents"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/leMaik/visage-elements",
+  "dependencies": {
+    "polymer": "~1.1.3"
+  },
+  "devDependencies": {
+    "webcomponentsjs": "~0.7.12"
+  }
+}

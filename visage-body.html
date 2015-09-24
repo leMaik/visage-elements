@@ -1,0 +1,69 @@
+<link rel="import" href="../polymer/polymer.html">
+<dom-module id="visage-body">
+    <style is="custom-style">
+        :host {
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+    <template>
+        <img src="[[src]]" width="{{_getWidth(size, type)}}" height="[[size]]"/>
+    </template>
+    <script>
+        Polymer({
+            is: 'visage-body',
+            properties: {
+                uuid: {
+                    type: String,
+                    reflectToAttribute: true,
+                    notify: true
+                },
+                name: {
+                    type: String,
+                    reflectToAttribute: true,
+                    notify: true,
+                    observer: '_nameChanged'
+                },
+                size: {
+                    type: Number,
+                    reflectToAttribute: true,
+                    notify: true
+                },
+                type: {
+                    type: String,
+                    reflectToAttribute: true,
+                    notify: true,
+                    value: 'full'
+                },
+                src: {
+                    type: String,
+                    readOnly: true,
+                    computed: '_computeSrc(uuid, size, type)'
+                }
+            },
+
+            _computeSrc: function (uuid, size, type) {
+                if (type == 'full' || type == 'bust') {
+                    return 'http://visage.surgeplay.com/' + type + '/' + size + '/' + uuid.replace(/-/g, '');
+                } else {
+                    console.warn('Invalid body type: ' + type);
+                }
+            },
+
+            _nameChanged: function () {
+                if (this.name != 'X-Steve' && this.name != 'X-Alex') {
+                    console.warn('Using player names to get skins is deprecated and may not work someday. Consider using UUIDs.');
+                }
+                this.uuid = this.name;
+            },
+
+            _getWidth: function (size, type) {
+                if (type == 'full') {
+                    return (size * 0.61719) | 0;
+                } else if (type == 'bust') {
+                    return size;
+                }
+            }
+        });
+    </script>
+</dom-module>
