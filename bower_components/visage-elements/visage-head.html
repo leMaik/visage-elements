@@ -1,0 +1,63 @@
+<link rel="import" href="../polymer/polymer.html">
+<dom-module id="visage-head">
+    <style is="custom-style">
+        :host {
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+    <template>
+        <img src="[[src]]" width="[[size]]" height="[[size]]"/>
+    </template>
+    <script>
+        Polymer({
+            is: 'visage-head',
+            properties: {
+                uuid: {
+                    type: String,
+                    reflectToAttribute: true,
+                    notify: true
+                },
+                name: {
+                    type: String,
+                    reflectToAttribute: true,
+                    notify: true,
+                    observer: '_nameChanged'
+                },
+                size: {
+                    type: Number,
+                    reflectToAttribute: true,
+                    notify: true
+                },
+                type: {
+                    type: String,
+                    reflectToAttribute: true,
+                    notify: true,
+                    value: '3d'
+                },
+                src: {
+                    type: String,
+                    readOnly: true,
+                    computed: '_computeSrc(uuid, size, type)'
+                }
+            },
+
+            _computeSrc: function (uuid, size, type) {
+                if (type == '2d') {
+                    return 'http://visage.surgeplay.com/face/' + size + '/' + uuid.replace(/-/g, '');
+                } else if (type == '3d') {
+                    return 'http://visage.surgeplay.com/head/' + size + '/' + uuid.replace(/-/g, '');
+                } else {
+                    console.warn('Invalid head type: ' + type);
+                }
+            },
+
+            _nameChanged: function () {
+                if (this.name != 'X-Steve' && this.name != 'X-Alex') {
+                    console.warn('Using player names to get skins is deprecated and may not work someday. Consider using UUIDs.');
+                }
+                this.uuid = this.name;
+            }
+        });
+    </script>
+</dom-module>

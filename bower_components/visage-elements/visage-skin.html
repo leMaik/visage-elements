@@ -1,0 +1,46 @@
+<link rel="import" href="../polymer/polymer.html">
+<dom-module id="visage-skin">
+    <style is="custom-style">
+        :host {
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+    <template>
+        <img src="[[src]]"/>
+    </template>
+    <script>
+        Polymer({
+            is: 'visage-skin',
+            properties: {
+                uuid: {
+                    type: String,
+                    reflectToAttribute: true,
+                    notify: true
+                },
+                name: {
+                    type: String,
+                    reflectToAttribute: true,
+                    notify: true,
+                    observer: '_nameChanged'
+                },
+                src: {
+                    type: String,
+                    readOnly: true,
+                    computed: '_computeSrc(uuid)'
+                }
+            },
+
+            _computeSrc: function (uuid) {
+                return 'http://visage.surgeplay.com/skin/' + uuid.replace(/-/g, '');
+            },
+
+            _nameChanged: function () {
+                if (this.name != 'X-Steve' && this.name != 'X-Alex') {
+                    console.warn('Using player names to get skins is deprecated and may not work someday. Consider using UUIDs.');
+                }
+                this.uuid = this.name;
+            }
+        });
+    </script>
+</dom-module>
